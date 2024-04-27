@@ -11,7 +11,10 @@ const ExpensForm = ({ handelonSubmit }) => {
   return (
     <div className=" flex flex-col  items-center w-screen">
       <form
-        onSubmit={handleSubmit(handelonSubmit)}
+        onSubmit={handleSubmit((data)=>{
+          handelonSubmit(data);
+          reset()
+        })}
         className="bg-gray-200 flex flex-col m-3 h-72 w-9/12 p-2 gap-2"
       >
         <div className="w-full">
