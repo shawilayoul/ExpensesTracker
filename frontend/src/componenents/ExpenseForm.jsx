@@ -1,9 +1,6 @@
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import ShowExpenses from "../componenents/ShowExpenses";
-const ExpensForm = () => {
-  const [expenses, setExpenses] = useState([]);
 
+const ExpensForm = ({ handelonSubmit }) => {
   const {
     register,
     handleSubmit,
@@ -11,26 +8,11 @@ const ExpensForm = () => {
     formState: { errors },
   } = useForm();
 
-  const handelExpenses = (data) => {
-    //console.log(data);
-    setExpenses((prev)=>[
-      ...prev,
-      {
-        id: Math.trunc(Math.random() * 1000) + "",
-        desc: data.desc,
-        amount:data.amount,
-        categories:data.categories
-      }
-    ]);
-    reset();
-  };
-  console.log(expenses);
-
   return (
-    <div className=" flex flex-col  items-center w-screen h-svh">
+    <div className=" flex flex-col  items-center w-screen">
       <form
-        onSubmit={handleSubmit(handelExpenses)}
-        className="bg-gray-200 flex flex-col items-center m-3 h-72 w-9/12 p-2 gap-2"
+        onSubmit={handleSubmit(handelonSubmit)}
+        className="bg-gray-200 flex flex-col m-3 h-72 w-9/12 p-2 gap-2"
       >
         <div className="w-full">
           <div>
@@ -68,7 +50,6 @@ const ExpensForm = () => {
             className="border-2 w-full"
             {...register("categories", { required: true })}
           >
-            <option value="All Categories">All Categories</option>
             <option value="Groceries">Groceries</option>
             <option value="Utilities">Utilities</option>
             <option value="Entertaiment">Entertaiment</option>
@@ -82,7 +63,6 @@ const ExpensForm = () => {
           submit
         </button>
       </form>
-      <ShowExpenses expenses={expenses} setExpenses={setExpenses}/>
     </div>
   );
 };

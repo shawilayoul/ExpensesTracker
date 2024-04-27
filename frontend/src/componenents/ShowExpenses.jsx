@@ -1,47 +1,23 @@
 const ShowExpenses = ({ expenses, setExpenses }) => {
-  console.log(expenses);
-
   const handelDelete = (id) => {
     setExpenses(expenses.filter((exp) => exp.id !== id));
   };
 
-  let filterValue;
-  if (expenses.categories === "All categories")
-    setExpenses(
-      expenses.filter((exp) => exp.categories === "All categories")
-    );
-  if (expenses.categories === "Groceries")
-    setExpenses(
-      expenses.filter((exp) => exp.categories === "Groceries")
-    );
-  if (expenses.categories === "Utilities")
-    setExpenses(
-      expenses.filter((exp) => exp.categories === "Utilities")
-    );
-  if (expenses.categories === "Entertaiment")
-    setExpenses(
-      expenses.filter((exp) => exp.categories === "Entertaiment")
-    );
-
   console.log(expenses);
   return (
-    <div className="bg-gray-200 flex flex-col items-center m-3 h-72 w-9/12 p-2 gap-2">
-      <h1>Filter data by Categories</h1>
-      <select name="" id="">
-        <option value={expenses.categories}>All Categories</option>
-        <option value={expenses.categories}>Groceries</option>
-        <option value={expenses.categories}>Utilities</option>
-        <option value={expenses.categories}>Entertaiment</option>
-      </select>
-      <table className="flex flex-col gap-2">
-        <thead className="w-full flex gap-40">
-          <th>Descriptions</th>
-          <th>Amount</th>
-          <th>Categories</th>
+    <div className="flex flex-col  items-center w-screen">
+      <table className="bg-gray-200 flex flex-col   gap-2 p-2  w-9/12">
+        <thead>
+          <tr className="flex justify-between border-2  border-rose-600">
+            <th>Descriptions</th>
+            <th>Amount</th>
+            <th>Categories</th>
+            <th></th>
+          </tr>
         </thead>
         {expenses.map((items) => {
           return (
-            <tbody className="w-full flex gap-40">
+            <tbody key={items.id} className="flex justify-between ">
               <td>{items.desc}</td>
               <td>{items.amount}</td>
               <td>{items.categories}</td>
@@ -55,10 +31,8 @@ const ShowExpenses = ({ expenses, setExpenses }) => {
           );
         })}
         <tfoot>
-          {" "}
           <tr>
-            {" "}
-            <th>Total :{expenses.amount} </th>
+            <th>Total:</th>
           </tr>
         </tfoot>
       </table>
